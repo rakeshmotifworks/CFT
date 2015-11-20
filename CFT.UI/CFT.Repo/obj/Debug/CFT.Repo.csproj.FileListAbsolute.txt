@@ -1,0 +1,9 @@
+D:\CFT\CFT.UI\CFT.Repo\bin\Debug\CFT.Repo.dll.config
+D:\CFT\CFT.UI\CFT.Repo\bin\Debug\CFT.Repo.dll
+D:\CFT\CFT.UI\CFT.Repo\bin\Debug\CFT.Repo.pdb
+D:\CFT\CFT.UI\CFT.Repo\bin\Debug\EntityFramework.dll
+D:\CFT\CFT.UI\CFT.Repo\bin\Debug\EntityFramework.SqlServer.dll
+D:\CFT\CFT.UI\CFT.Repo\bin\Debug\EntityFramework.xml
+D:\CFT\CFT.UI\CFT.Repo\bin\Debug\EntityFramework.SqlServer.xml
+D:\CFT\CFT.UI\CFT.Repo\obj\Debug\CFT.Repo.dll
+D:\CFT\CFT.UI\CFT.Repo\obj\Debug\CFT.Repo.pdb

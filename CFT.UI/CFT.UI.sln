@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFT.UI", "CFT.UI\CFT.UI.csproj", "{482D9139-7A74-4B85-A4C6-E390A311520C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFT.Repo", "CFT.Repo\CFT.Repo.csproj", "{8EB7637D-38EE-4365-B68B-8CC9777FE2AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFT.API", "CFT.API\CFT.API.csproj", "{89E59BD8-B97F-458D-9AD2-43358A06A361}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{482D9139-7A74-4B85-A4C6-E390A311520C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482D9139-7A74-4B85-A4C6-E390A311520C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482D9139-7A74-4B85-A4C6-E390A311520C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482D9139-7A74-4B85-A4C6-E390A311520C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EB7637D-38EE-4365-B68B-8CC9777FE2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EB7637D-38EE-4365-B68B-8CC9777FE2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EB7637D-38EE-4365-B68B-8CC9777FE2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EB7637D-38EE-4365-B68B-8CC9777FE2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E59BD8-B97F-458D-9AD2-43358A06A361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E59BD8-B97F-458D-9AD2-43358A06A361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E59BD8-B97F-458D-9AD2-43358A06A361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E59BD8-B97F-458D-9AD2-43358A06A361}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
