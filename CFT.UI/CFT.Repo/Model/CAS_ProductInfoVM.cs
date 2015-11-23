@@ -25,6 +25,7 @@ namespace CFT.Repo.Model
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> ISDeleted { get; set; }
 
-        public virtual ICollection<CAS_FeedbackDataVM> CAS_FeedbackData { get; set; }
+        public virtual ICollection<CAS_FeedbackDataVM> CAS_FeedbackDataVM { get; set; }
+        public virtual ICollection<CAS_FeedbackData> CAS_FeedbackData { get; set; }
     }
 }

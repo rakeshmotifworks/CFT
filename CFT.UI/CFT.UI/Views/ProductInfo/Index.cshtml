@@ -1,117 +1,100 @@
-﻿@model IEnumerable<CFT.Repo.CAS_ProductInfo>
+﻿@model IEnumerable<CFT.Repo.Model.CAS_ProductInfoVM>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Product Information</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table id="productInfoGrid" class="table table-condensed  sortable table-hover no-margin">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CAS_ProductId)
+            @Html.DisplayName("ProductId")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Business_Unit)
+            @Html.DisplayName("Business_Unit")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project_Name)
+            @Html.DisplayName("Project Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customer_Name)
+            @Html.DisplayName("Customer Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IEC_Contact)
+            @Html.DisplayName("IEC Contact")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project_Team)
+            @Html.DisplayName("Project Team")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Function)
+            @Html.DisplayName("Function")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
+            @Html.DisplayName("Customer Email")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayName("Customer Phone")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UpdateAt)
+            @Html.DisplayName("Status")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ISDeleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer_Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer_Phone)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CAS_ProductId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Business_Unit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IEC_Contact)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project_Team)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Function)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISDeleted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer_Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer_Phone)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CAS_ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Business_Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IEC_Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project_Team)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_Phone)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#txtSearch").keyup(function () {
+        $(document).on('keyup', '#txtSearch', function () {
+            var value = this.value.toLowerCase().trim();
+            //var value = this.value;
+            $("#productInfoGrid").find("tr").each(function (index) {
+                if (!index) return;
+                var id = $(this).find("td").text().toLowerCase();
+                $(this).toggle(id.indexOf(value) != -1);
+            });
+        });
+    });
+</script>

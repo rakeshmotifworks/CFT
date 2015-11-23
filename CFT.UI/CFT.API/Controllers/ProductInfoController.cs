@@ -17,7 +17,7 @@ namespace CFT.API.Controllers
     public class ProductInfoController : ApiController
     {
         private CFT_DBEntities db = new CFT_DBEntities();
-        private CreateProductInfo _createProductInfo;
+        private ProductInfoBAL _createProductInfo;
 
         // GET: api/ProductInfo
         public IQueryable<CAS_ProductInfoVM> GetCAS_ProductInfoVM()
@@ -84,7 +84,7 @@ namespace CFT.API.Controllers
 
             try
             {
-                _createProductInfo = new CreateProductInfo();
+                _createProductInfo = new ProductInfoBAL();
                 _createProductInfo.CreateProductData(cAS_ProductInfoVM);
 
                 return CreatedAtRoute("Product Information Created ref id - ", new { id = cAS_ProductInfoVM.Id }, cAS_ProductInfoVM);

@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BAL\CreateProductInfo.cs" />
+    <Compile Include="BAL\ProductInfoBAL.cs" />
     <Compile Include="CAS_FeedbackData.cs">
       <DependentUpon>CFT.tt</DependentUpon>
     </Compile>
@@ -71,7 +71,7 @@
       <DependentUpon>CFT.edmx</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
-    <Compile Include="IBAL\ICreateProductInfo.cs" />
+    <Compile Include="IBAL\IProductInfoBAL.cs" />
     <Compile Include="Model\CAS_FeedbackDataVM.cs" />
     <Compile Include="Model\CAS_ProductInfoVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CFT.Repo.BAL;
+using CFT.Repo.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,23 @@ namespace CFT.UI.Controllers
 {
     public class ProductInfoController : Controller
     {
+        private List<CAS_ProductInfoVM> _cAS_ProductInfoVMList;
+        private ProductInfoBAL _productInfoBAL;
         // GET: ProductInfo
         public ActionResult Index()
         {
-            return View();
+            _productInfoBAL = new ProductInfoBAL();
+            _cAS_ProductInfoVMList = new List<CAS_ProductInfoVM>();
+            try
+            {
+                _cAS_ProductInfoVMList = _productInfoBAL.GetAllProductData();
+            }
+            catch (Exception ex)
+            {
+              
+            }
+
+            return View(_cAS_ProductInfoVMList);
         }
 
         // GET: ProductInfo/Details/5

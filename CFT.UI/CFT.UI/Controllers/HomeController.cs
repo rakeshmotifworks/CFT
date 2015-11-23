@@ -57,7 +57,7 @@ namespace CFT.UI.Controllers
                 _cAS_ProductInfoVM.UpdateBy = "RC";
                 _cAS_ProductInfoVM.IsActive = true;
                 _cAS_ProductInfoVM.ISDeleted = false;
-                _cAS_ProductInfoVM.CAS_FeedbackData = GetFeedbackData();
+                _cAS_ProductInfoVM.CAS_FeedbackDataVM = GetFeedbackData();
 
                 var client = new HttpClient();
                 client.BaseAddress = new Uri("http://dcprc-test1.cloudapp.net/lal_api/");
@@ -114,6 +114,5 @@ namespace CFT.UI.Controllers
                 return feedbackList;
             }
         }
-
     }
 }
