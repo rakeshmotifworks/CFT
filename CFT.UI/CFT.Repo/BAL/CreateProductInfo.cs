@@ -33,6 +33,8 @@ namespace CFT.Repo.BAL
                     productInfo.Business_Unit = model.Business_Unit;
                     productInfo.Project_Name = model.Project_Name;
                     productInfo.Customer_Name = model.Customer_Name;
+                    productInfo.Customer_Email = model.Customer_Name;
+                    productInfo.Customer_Phone = model.Customer_Name;
                     productInfo.IEC_Contact = model.IEC_Contact;
                     productInfo.Project_Team = model.Project_Team;
                     productInfo.Function = model.Function;

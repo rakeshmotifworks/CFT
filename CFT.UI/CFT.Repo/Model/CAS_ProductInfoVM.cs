@@ -13,6 +13,8 @@ namespace CFT.Repo.Model
         public string Business_Unit { get; set; }
         public string Project_Name { get; set; }
         public string Customer_Name { get; set; }
+        public string Customer_Email { get; set; }
+        public string Customer_Phone { get; set; }
         public string IEC_Contact { get; set; }
         public string Project_Team { get; set; }
         public string Function { get; set; }
@@ -23,6 +25,6 @@ namespace CFT.Repo.Model
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> ISDeleted { get; set; }
 
-        public virtual ICollection<CAS_FeedbackData> CAS_FeedbackData { get; set; }
+        public virtual ICollection<CAS_FeedbackDataVM> CAS_FeedbackData { get; set; }
     }
 }

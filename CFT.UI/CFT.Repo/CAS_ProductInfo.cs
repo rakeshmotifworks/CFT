@@ -33,6 +33,8 @@ namespace CFT.Repo
         public string UpdateBy { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> ISDeleted { get; set; }
+        public string Customer_Email { get; set; }
+        public string Customer_Phone { get; set; }
     
         public virtual ICollection<CAS_FeedbackData> CAS_FeedbackData { get; set; }
     }

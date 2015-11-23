@@ -2,7 +2,10 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
-
+.navbar-inverse {
+  background-color: #ffffff !important;
+  border-color: #080808;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -22,3 +25,4 @@ select,
 textarea {
     max-width: 280px;
 }
+

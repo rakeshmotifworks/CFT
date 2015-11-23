@@ -41,6 +41,8 @@
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="ISDeleted" Type="Boolean" />
     <NavigationProperty Name="CAS_FeedbackData" Relationship="Self.FK_CAS_FeedbackData_CAS_ProductInfo" FromRole="CAS_ProductInfo" ToRole="CAS_FeedbackData" />
+    <Property Name="Customer_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_CAS_FeedbackData_CAS_ProductInfo">
     <End Role="CAS_ProductInfo" Type="Self.CAS_ProductInfo" Multiplicity="0..1" />

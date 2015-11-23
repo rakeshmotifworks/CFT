@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="16a4750053df41cf8f9262392eb29ced" Name="Diagram1">
+      <Diagram DiagramId="16a4750053df41cf8f9262392eb29ced" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="CFT_DBModel.CAS_FeedbackData" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CFT_DBModel.CAS_ProductInfo" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="CFT_DBModel.FK_CAS_FeedbackData_CAS_ProductInfo" ManuallyRouted="false" />

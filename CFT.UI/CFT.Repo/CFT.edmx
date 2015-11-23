@@ -35,6 +35,8 @@
           <Property Name="Business_Unit" Type="nvarchar" MaxLength="255" />
           <Property Name="Project_Name" Type="nvarchar" MaxLength="255" />
           <Property Name="Customer_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Customer_Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Customer_Phone" Type="nvarchar" MaxLength="255" />
           <Property Name="IEC_Contact" Type="nvarchar" MaxLength="255" />
           <Property Name="Project_Team" Type="nvarchar" MaxLength="255" />
           <Property Name="Function" Type="nvarchar" MaxLength="255" />
@@ -110,6 +112,8 @@
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="ISDeleted" Type="Boolean" />
           <NavigationProperty Name="CAS_FeedbackData" Relationship="Self.FK_CAS_FeedbackData_CAS_ProductInfo" FromRole="CAS_ProductInfo" ToRole="CAS_FeedbackData" />
+          <Property Name="Customer_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CAS_FeedbackData_CAS_ProductInfo">
           <End Role="CAS_ProductInfo" Type="Self.CAS_ProductInfo" Multiplicity="0..1" />
@@ -162,6 +166,8 @@
           <EntitySetMapping Name="CAS_ProductInfo">
             <EntityTypeMapping TypeName="CFT_DBModel.CAS_ProductInfo">
               <MappingFragment StoreEntitySet="CAS_ProductInfo">
+                <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
+                <ScalarProperty Name="Customer_Email" ColumnName="Customer_Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CAS_ProductId" ColumnName="CAS_ProductId" />
                 <ScalarProperty Name="Business_Unit" ColumnName="Business_Unit" />

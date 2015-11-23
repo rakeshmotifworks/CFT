@@ -20,6 +20,7 @@ D:\CFT\CFT.UI\CFT.API\bin\Microsoft.Owin.Security.Twitter.dll
 D:\CFT\CFT.UI\CFT.API\bin\Microsoft.Web.Infrastructure.dll
 D:\CFT\CFT.UI\CFT.API\bin\Newtonsoft.Json.dll
 D:\CFT\CFT.UI\CFT.API\bin\Owin.dll
+D:\CFT\CFT.UI\CFT.API\bin\Swashbuckle.Core.dll
 D:\CFT\CFT.UI\CFT.API\bin\System.Net.Http.Formatting.dll
 D:\CFT\CFT.UI\CFT.API\bin\System.Web.Helpers.dll
 D:\CFT\CFT.UI\CFT.API\bin\System.Web.Http.dll
@@ -31,6 +32,7 @@ D:\CFT\CFT.UI\CFT.API\bin\System.Web.Razor.dll
 D:\CFT\CFT.UI\CFT.API\bin\System.Web.WebPages.Deployment.dll
 D:\CFT\CFT.UI\CFT.API\bin\System.Web.WebPages.dll
 D:\CFT\CFT.UI\CFT.API\bin\System.Web.WebPages.Razor.dll
+D:\CFT\CFT.UI\CFT.API\bin\WebActivatorEx.dll
 D:\CFT\CFT.UI\CFT.API\bin\WebGrease.dll
 D:\CFT\CFT.UI\CFT.API\bin\CFT.Repo.pdb
 D:\CFT\CFT.UI\CFT.API\bin\Newtonsoft.Json.xml

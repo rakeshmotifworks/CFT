@@ -30,6 +30,8 @@
     <Property Name="Business_Unit" Type="nvarchar" MaxLength="255" />
     <Property Name="Project_Name" Type="nvarchar" MaxLength="255" />
     <Property Name="Customer_Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Customer_Email" Type="nvarchar" MaxLength="255" />
+    <Property Name="Customer_Phone" Type="nvarchar" MaxLength="255" />
     <Property Name="IEC_Contact" Type="nvarchar" MaxLength="255" />
     <Property Name="Project_Team" Type="nvarchar" MaxLength="255" />
     <Property Name="Function" Type="nvarchar" MaxLength="255" />

@@ -10,20 +10,22 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CFT.Repo;
 using CFT.Repo.Model;
+using CFT.Repo.BAL;
 
 namespace CFT.API.Controllers
 {
-    public class CAS_ProductInfoVMController : ApiController
+    public class ProductInfoController : ApiController
     {
         private CFT_DBEntities db = new CFT_DBEntities();
+        private CreateProductInfo _createProductInfo;
 
-        // GET: api/CAS_ProductInfoVM
+        // GET: api/ProductInfo
         public IQueryable<CAS_ProductInfoVM> GetCAS_ProductInfoVM()
         {
             return db.CAS_ProductInfoVM;
         }
 
-        // GET: api/CAS_ProductInfoVM/5
+        // GET: api/ProductInfo/5
         [ResponseType(typeof(CAS_ProductInfoVM))]
         public IHttpActionResult GetCAS_ProductInfoVM(int id)
         {
@@ -36,7 +38,7 @@ namespace CFT.API.Controllers
             return Ok(cAS_ProductInfoVM);
         }
 
-        // PUT: api/CAS_ProductInfoVM/5
+        // PUT: api/ProductInfo/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCAS_ProductInfoVM(int id, CAS_ProductInfoVM cAS_ProductInfoVM)
         {
@@ -71,7 +73,7 @@ namespace CFT.API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CAS_ProductInfoVM
+        // POST: api/ProductInfo
         [ResponseType(typeof(CAS_ProductInfoVM))]
         public IHttpActionResult PostCAS_ProductInfoVM(CAS_ProductInfoVM cAS_ProductInfoVM)
         {
@@ -80,15 +82,25 @@ namespace CFT.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            CAS_ProductInfo productInfo = new CAS_ProductInfo();
+            try
+            {
+                _createProductInfo = new CreateProductInfo();
+                _createProductInfo.CreateProductData(cAS_ProductInfoVM);
 
-            db.CAS_ProductInfo.Add(productInfo);
-            db.SaveChanges();
+                return CreatedAtRoute("Product Information Created ref id - ", new { id = cAS_ProductInfoVM.Id }, cAS_ProductInfoVM);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            //db.CAS_ProductInfoVM.Add(cAS_ProductInfoVM);
+            //db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = cAS_ProductInfoVM.Id }, cAS_ProductInfoVM);
         }
 
-        // DELETE: api/CAS_ProductInfoVM/5
+        // DELETE: api/ProductInfo/5
         [ResponseType(typeof(CAS_ProductInfoVM))]
         public IHttpActionResult DeleteCAS_ProductInfoVM(int id)
         {
