@@ -18,7 +18,7 @@ namespace CFT.UI.Controllers
         private CAS_ProductInfoVM _cAS_ProductInfoVM;
         public ActionResult Index()
         {
-           // CreateWepApi();
+            CreateWepApi();
             return View();
         }
 
@@ -40,41 +40,43 @@ namespace CFT.UI.Controllers
         {
             try
             {
-                _cAS_ProductInfoVM = new CAS_ProductInfoVM();
-
-                _cAS_ProductInfoVM.CAS_ProductId = "Prod_ref12";
-                _cAS_ProductInfoVM.Business_Unit = "Axis";
-                _cAS_ProductInfoVM.Project_Name = "DT_Proj";
-                _cAS_ProductInfoVM.Customer_Name = "Rakesh";
-                _cAS_ProductInfoVM.Customer_Email = "rakesh@motifworks.com";
-                _cAS_ProductInfoVM.Customer_Phone = "9663642655";
-                _cAS_ProductInfoVM.IEC_Contact = "Someone";
-                _cAS_ProductInfoVM.Project_Team = "Project";
-                _cAS_ProductInfoVM.Function = "Proj_Func";
-                _cAS_ProductInfoVM.CreatedAt = DateTime.Now;
-                _cAS_ProductInfoVM.CreatedBy = "RC";
-                _cAS_ProductInfoVM.UpdateAt = DateTime.Now;
-                _cAS_ProductInfoVM.UpdateBy = "RC";
-                _cAS_ProductInfoVM.IsActive = true;
-                _cAS_ProductInfoVM.ISDeleted = false;
-                _cAS_ProductInfoVM.CAS_FeedbackDataVM = GetFeedbackData();
-
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("http://dcprc-test1.cloudapp.net/lal_api/");
-
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var cftData = _cAS_ProductInfoVM;
-                var content = new System.Net.Http.StringContent(JsonConvert.SerializeObject(cftData), Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync("api/studies", content).Result;
-                if (response.IsSuccessStatusCode)
+                for (int i = 0; i < 20; i++)
                 {
-                  
-                }
-                else
-                {
-                    JObject root = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                }
+                    _cAS_ProductInfoVM = new CAS_ProductInfoVM();
 
+                    _cAS_ProductInfoVM.CAS_ProductId = "Prod_ref1" + i;
+                    _cAS_ProductInfoVM.Business_Unit = "Axis" + i;
+                    _cAS_ProductInfoVM.Project_Name = "DT_Proj" + i;
+                    _cAS_ProductInfoVM.Customer_Name = "Customer" + i;
+                    _cAS_ProductInfoVM.Customer_Email = "Customer@gmail.com" + i;
+                    _cAS_ProductInfoVM.Customer_Phone = "1234567890";
+                    _cAS_ProductInfoVM.IEC_Contact = "Someone" + i;
+                    _cAS_ProductInfoVM.Project_Team = "Project" + i;
+                    _cAS_ProductInfoVM.Function = "Proj_Func" + i;
+                    _cAS_ProductInfoVM.CreatedAt = DateTime.Now;
+                    _cAS_ProductInfoVM.CreatedBy = "RC";
+                    _cAS_ProductInfoVM.UpdateAt = DateTime.Now;
+                    _cAS_ProductInfoVM.UpdateBy = "RC";
+                    _cAS_ProductInfoVM.IsActive = true;
+                    _cAS_ProductInfoVM.ISDeleted = false;
+                    _cAS_ProductInfoVM.CAS_FeedbackDataVM = GetFeedbackData();
+
+                    var client = new HttpClient();
+                    client.BaseAddress = new Uri("http://dcprc-test1.cloudapp.net/lal_api/");
+
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var cftData = _cAS_ProductInfoVM;
+                    var content = new System.Net.Http.StringContent(JsonConvert.SerializeObject(cftData), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = client.PostAsync("api/studies", content).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                    }
+                    else
+                    {
+                        JObject root = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -85,7 +87,7 @@ namespace CFT.UI.Controllers
         Collection<CAS_FeedbackDataVM> GetFeedbackData()
         {
             Collection<CAS_FeedbackDataVM> feedbackList = new Collection<CAS_FeedbackDataVM>();
-            
+
             try
             {
                 feedbackList.Add(new CAS_FeedbackDataVM()

@@ -9,8 +9,8 @@
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
-<table id="productInfoGrid" class="table table-condensed  sortable table-hover no-margin">
-    <tr>
+<table id="productInfoGrid" class="table table-condensed  sortable">
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayName("ProductId")
         </th>
@@ -45,7 +45,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr style="border-bottom:1px; border-bottom-color:gray;">
             <td>
                 @Html.DisplayFor(modelItem => item.CAS_ProductId)
             </td>
@@ -74,15 +74,20 @@
                 @Html.DisplayFor(modelItem => item.Customer_Phone)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                <span style="color:red">Pending</span>
             </td>
+            
         </tr>
     }
 
 </table>
+<hr />
+<div>
 
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {

@@ -87,16 +87,13 @@ namespace CFT.API.Controllers
                 _createProductInfo = new ProductInfoBAL();
                 _createProductInfo.CreateProductData(cAS_ProductInfoVM);
 
-                return CreatedAtRoute("Product Information Created ref id - ", new { id = cAS_ProductInfoVM.Id }, cAS_ProductInfoVM);
+                return Ok("Product Information Created ref id - " + cAS_ProductInfoVM.Id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                return BadRequest(ex.Message);
             }
-            //db.CAS_ProductInfoVM.Add(cAS_ProductInfoVM);
-            //db.SaveChanges();
-
+           
             return CreatedAtRoute("DefaultApi", new { id = cAS_ProductInfoVM.Id }, cAS_ProductInfoVM);
         }
 

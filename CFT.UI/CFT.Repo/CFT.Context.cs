@@ -27,7 +27,5 @@ namespace CFT.Repo
     
         public virtual DbSet<CAS_FeedbackData> CAS_FeedbackData { get; set; }
         public virtual DbSet<CAS_ProductInfo> CAS_ProductInfo { get; set; }
-
-        public System.Data.Entity.DbSet<CFT.Repo.Model.CAS_ProductInfoVM> CAS_ProductInfoVM { get; set; }
     }
 }

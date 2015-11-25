@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CAS_ProdInfo_FK" Type="int" />
           <Property Name="Quality" Type="nvarchar" MaxLength="10" />
           <Property Name="Adherence_To_Schedule" Type="nvarchar" MaxLength="10" />
