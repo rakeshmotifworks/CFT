@@ -1,0 +1,136 @@
+﻿@model CFT.Repo.Model.CAS_ProductInfoVM
+
+
+@foreach (var item in @Model.CAS_FeedbackDataVM)
+{
+ 
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color: #428bca; color:white">
+        <h3 class="panel-title">Create IC</h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12" id="divParent">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Quality", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Quality, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Adherence To Schedule", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Adherence_To_Schedule, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Alternate Solutions Value addition", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Alternate_Solutions_Value_addition, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Effectiveness of Communication", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Effectiveness_of_Communication, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Independent Project execution Customers Efforts", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Independent_project_execution_Customers_Efforts, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Overall Satisfaction", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Overall_Satisfaction, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Status", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Status, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="col-xs-12 col-sm-12 col-md-12 row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <div class="form-group">
+                                @Html.Label("Additional Comments Issues Concerns Suggestions", new { @style = "font-family:Adobe Hebrew" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.Label(@item.Additional_Comments_Issues_Concerns_Suggestions, null, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+       
+}
