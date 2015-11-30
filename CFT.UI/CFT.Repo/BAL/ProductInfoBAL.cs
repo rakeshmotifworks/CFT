@@ -14,6 +14,7 @@ namespace CFT.Repo.BAL
         private CAS_ProductInfoVM _cAS_ProductInfoVM;
         private List<CAS_ProductInfoVM> _cAS_ProductInfoVMList;
         private CAS_FeedbackDataVM _cAS_FeedbackDataVM;
+        private Collection<CAS_FeedbackDataVM> _cAS_FeedbackDataVMList;
         private CFT_DBEntities _db;
 
         /// <summary>
@@ -119,40 +120,142 @@ namespace CFT.Repo.BAL
             throw new NotImplementedException();
         }
 
-        public List<CAS_ProductInfoVM> GetAllProductData()
+        public List<CAS_ProductInfoVM> GetAllProductData(SearchVM search, out int totalcount)
         {
             _cAS_ProductInfoVMList = new List<CAS_ProductInfoVM>();
+            _db = new CFT_DBEntities();
+            IEnumerable<CAS_ProductInfo> query = _db.CAS_ProductInfo.Include("CAS_FeedbackData").ToList();
+            totalcount = query.Count();
+            search.PageCurrentIndex = search.PageCurrentIndex <= 0 ? 0 : search.PageCurrentIndex;
+
+            query = query.Skip(search.PageCurrentIndex * search.PageSize).Take(search.PageSize);
+            search.PageCount =
+                Convert.ToInt32(Math.Ceiling((double)((double)(totalcount / (double)search.PageSize))));
+
+            var lists = query.Select((a => new CAS_ProductInfoVM()
+            {
+                Business_Unit = a.Business_Unit,
+                CAS_ProductId = a.CAS_ProductId,
+                CAS_FeedbackDataVM = ConvertToFeedBackDataVM(a),
+                Customer_Email = a.Customer_Email,
+                Customer_Name = a.Customer_Name,
+                Customer_Phone = a.Customer_Phone,
+                Function = a.Function,
+                Id = a.Id,
+                IEC_Contact = a.IEC_Contact,
+                Project_Name = a.Project_Name,
+                Project_Team = a.Project_Team,
+                CreatedAt = a.CreatedAt,
+                CreatedBy = a.CreatedBy,
+                UpdateAt = a.UpdateAt,
+                UpdateBy = a.UpdateBy,
+                IsActive = a.IsActive,
+                ISDeleted = a.ISDeleted
+            }));
+
+            List<CAS_ProductInfoVM> listitems = lists.ToList();
+            return listitems;
+        }
+
+        public CAS_ProductInfoVM GetProductDataById(string id)
+        {
+            _cAS_ProductInfoVM = new CAS_ProductInfoVM();
             try
             {
                 using (_db = new CFT_DBEntities())
                 {
-                    _cAS_ProductInfoVMList = (from prod in _db.CAS_ProductInfo
-                                          select new CAS_ProductInfoVM
-                                          {
-                                              Business_Unit = prod.Business_Unit,
-                                              CAS_ProductId = prod.CAS_ProductId,
-                                              CAS_FeedbackData = prod.CAS_FeedbackData,
-                                              Customer_Email = prod.Customer_Email,
-                                              Customer_Name = prod.Customer_Name,
-                                              Customer_Phone = prod.Customer_Phone,
-                                              Function = prod.Function,
-                                              Id = prod.Id,
-                                              IEC_Contact = prod.IEC_Contact,
-                                              Project_Name = prod.Project_Name,
-                                              Project_Team = prod.Project_Team,
-                                              CreatedAt = prod.CreatedAt,
-                                              CreatedBy = prod.CreatedBy,
-                                              UpdateAt = prod.UpdateAt,
-                                              UpdateBy = prod.UpdateBy,
-                                              IsActive = prod.IsActive,
-                                              ISDeleted = prod.ISDeleted
-                                          }).ToList();
+                    var getData = (from prod in _db.CAS_ProductInfo.Include("CAS_FeedbackData")
+                                          where prod.CAS_ProductId == id
+                                          select prod).FirstOrDefault();
+
+
+                    _cAS_ProductInfoVM.Business_Unit = getData.Business_Unit;
+                    _cAS_ProductInfoVM.CAS_FeedbackData = getData.CAS_FeedbackData;
+                    _cAS_ProductInfoVM.CAS_ProductId = getData.CAS_ProductId;
+                    _cAS_ProductInfoVM.CreatedAt = getData.CreatedAt;
+                    _cAS_ProductInfoVM.CreatedBy = getData.CreatedBy;
+                    _cAS_ProductInfoVM.Customer_Email = getData.Customer_Email;
+                    _cAS_ProductInfoVM.Customer_Name = getData.Customer_Name;
+                    _cAS_ProductInfoVM.Customer_Phone = getData.Customer_Phone;
+                    _cAS_ProductInfoVM.Function = getData.Function;
+                    _cAS_ProductInfoVM.Id = getData.Id;
+                    _cAS_ProductInfoVM.IEC_Contact = getData.IEC_Contact;
+                    _cAS_ProductInfoVM.IsActive = getData.IsActive;
+                    _cAS_ProductInfoVM.ISDeleted = getData.ISDeleted;
+                    _cAS_ProductInfoVM.Project_Name = getData.Project_Name;
+                    _cAS_ProductInfoVM.Project_Team = getData.Project_Team;
+                    _cAS_ProductInfoVM.UpdateAt = getData.UpdateAt;
+                    _cAS_ProductInfoVM.UpdateBy = getData.UpdateBy;
+                    _cAS_ProductInfoVM.CAS_FeedbackDataVM = ConvertToFeedBackDataVM(getData);
+                                         
                 }
-                return _cAS_ProductInfoVMList;
             }
             catch (Exception ex)
             {
-                return _cAS_ProductInfoVMList;
+                return _cAS_ProductInfoVM;
+            }
+            return _cAS_ProductInfoVM;
+        }
+
+        public Collection<CAS_FeedbackDataVM> ConvertToFeedBackDataVM(CAS_ProductInfo model)
+        {
+            _cAS_FeedbackDataVMList = new Collection<CAS_FeedbackDataVM>();
+            _cAS_FeedbackDataVM = new CAS_FeedbackDataVM();
+            try
+            {
+                foreach (var item in model.CAS_FeedbackData)
+                {
+                    _cAS_FeedbackDataVM.Additional_Comments_Issues_Concerns_Suggestions = item.Additional_Comments_Issues_Concerns_Suggestions;
+                    _cAS_FeedbackDataVM.Adherence_To_Schedule = item.Adherence_To_Schedule;
+                    _cAS_FeedbackDataVM.Alternate_Solutions_Value_addition = item.Alternate_Solutions_Value_addition;
+                    _cAS_FeedbackDataVM.CAS_ProdInfo_FK = item.CAS_ProdInfo_FK;
+                    _cAS_FeedbackDataVM.CAS_ProductInfo = item.CAS_ProductInfo;
+                    _cAS_FeedbackDataVM.CreatedAt = item.CreatedAt;
+                    _cAS_FeedbackDataVM.CreatedBy = item.CreatedBy;
+                    _cAS_FeedbackDataVM.Effectiveness_of_Communication = item.Effectiveness_of_Communication;
+                    _cAS_FeedbackDataVM.Id = item.Id;
+                    _cAS_FeedbackDataVM.Independent_project_execution_Customers_Efforts = item.Independent_project_execution_Customers_Efforts;
+                    _cAS_FeedbackDataVM.IsActive = item.IsActive;
+                    _cAS_FeedbackDataVM.IsDeleted = item.IsDeleted;
+                    _cAS_FeedbackDataVM.Overall_Satisfaction = item.Overall_Satisfaction;
+                    _cAS_FeedbackDataVM.Quality = item.Quality;
+                    _cAS_FeedbackDataVM.Status = item.Status;
+                    _cAS_FeedbackDataVM.UpdatedAt = item.UpdatedAt;
+                    _cAS_FeedbackDataVM.UpdatedBy = item.UpdatedBy;
+
+                    _cAS_FeedbackDataVMList.Add(_cAS_FeedbackDataVM);
+                }
+            }
+            catch (Exception ex)
+            {
+                return _cAS_FeedbackDataVMList;
+            }
+            return _cAS_FeedbackDataVMList;
+        }
+
+
+        public void UpdateProductInfoAfterMailSent(string id)
+        {
+            try
+            {
+                using (_db = new CFT_DBEntities())
+                {
+                    var getData = _db.CAS_ProductInfo
+                        .Include("CAS_FeedbackData").Where(p => p.CAS_ProductId == id).FirstOrDefault();
+
+                    foreach (var item in getData.CAS_FeedbackData)
+                    {
+                        item.Status = "MailSent";
+                        item.UpdatedAt = DateTime.UtcNow;
+                        item.UpdatedBy = "RC";
+
+                        _db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+              
             }
         }
     }

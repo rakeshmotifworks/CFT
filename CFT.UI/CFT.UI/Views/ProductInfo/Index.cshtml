@@ -1,105 +1,173 @@
-﻿@model IEnumerable<CFT.Repo.Model.CAS_ProductInfoVM>
+﻿@*@model IEnumerable<CFT.Repo.Model.CAS_ProductInfoVM>*@
+@using CFT.Repo.Model
+@model CFT.Repo.Model.ProductInfoSearch
 
 @{
     ViewBag.Title = "Index";
+    SearchVM info = Model.SearchExpression;
 }
-
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 <h2>Product Information</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
-<table id="productInfoGrid" class="table table-condensed  sortable">
-    <tr style="background-color:lightgray">
-        <th>
-            @Html.DisplayName("ProductId")
-        </th>
-        <th>
-            @Html.DisplayName("Business_Unit")
-        </th>
-        <th>
-            @Html.DisplayName("Project Name")
-        </th>
-        <th>
-            @Html.DisplayName("Customer Name")
-        </th>
-        <th>
-            @Html.DisplayName("IEC Contact")
-        </th>
-        <th>
-            @Html.DisplayName("Project Team")
-        </th>
-        <th>
-            @Html.DisplayName("Function")
-        </th>
-        <th>
-            @Html.DisplayName("Customer Email")
-        </th>
-        <th>
-            @Html.DisplayName("Customer Phone")
-        </th>
-        <th>
-            @Html.DisplayName("Status")
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
+@using (Html.BeginForm("Index", "ProductInfo", FormMethod.Get))
+{
+    if (info != null)
     {
-        <tr style="border-bottom:1px; border-bottom-color:gray;">
-            <td>
-                @Html.DisplayFor(modelItem => item.CAS_ProductId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Business_Unit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IEC_Contact)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project_Team)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Function)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer_Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer_Phone)
-            </td>
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                <span style="color:red">Pending</span>
-            </td>
-            
-        </tr>
+        @Html.Hidden("SortName", info.SortName)
+        @Html.Hidden("IsSortAsc", info.IsSortAsc)
+        @Html.Hidden("PageCount", info.PageCount)
+        @Html.Hidden("PageSize", info.PageSize)
+        @Html.Hidden("PageCurrentIndex", info.PageCurrentIndex)
     }
 
-</table>
-<hr />
-<div>
+    <table id="productInfoGrid" class="table table-condensed  sortable" style="border-top-width: 3px; border-top-color: red;padding:0px; ">
+        <tr style="background-color:lightgray">
+            <th>
+                @Html.DisplayName("ProductId")
+            </th>
+            <th>
+                @Html.DisplayName("Business_Unit")
+            </th>
+            <th>
+                @Html.DisplayName("Project Name")
+            </th>
+            <th>
+                @Html.DisplayName("Customer Name")
+            </th>
+            <th>
+                @Html.DisplayName("IEC Contact")
+            </th>
+            <th>
+                @Html.DisplayName("Project Team")
+            </th>
+            <th>
+                @Html.DisplayName("Function")
+            </th>
+            <th>
+                @Html.DisplayName("Customer Email")
+            </th>
+            <th>
+                @Html.DisplayName("Customer Phone")
+            </th>
+            <th>
+                @Html.DisplayName("Status")
+            </th>
+        </tr>
+        @foreach (var item in Model.CAS_ProductInfoVM.Select((x, i) => new { Data = x, Index = i + 1 + info.PageCurrentIndex * info.PageSize }))
+            {
+            <tr style="border-bottom:1px; border-bottom-color:gray;" class="getdata" id=@item.Data.CAS_ProductId>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.CAS_ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Business_Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Project_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Customer_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.IEC_Contact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Project_Team)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Function)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Customer_Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Customer_Phone)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    @if(item.Data.CAS_FeedbackDataVM.FirstOrDefault().Status=="Pending")
+                    { 
+                    @Html.ActionLink("Send Mail", "SendFeedBackMail", "ProductInfo", new { id = item.Data.CAS_ProductId }, new { id = item.Data.CAS_ProductId, @class = "btn-sm btn-info btnSendMail" })
+                    }
+                    else if (item.Data.CAS_FeedbackDataVM.FirstOrDefault().Status == "MailSent")
+                    {
+                        @Html.ActionLink("Mail Sent", "SendFeedBackMail", "ProductInfo", new { id = item.Data.CAS_ProductId }, new { id = item.Data.CAS_ProductId, @class = "btn-sm btn-danger btnSendMail", @readonly = "readonly", @onclick = "javascript:return false;" })
+                    }
+                    else if (item.Data.CAS_FeedbackDataVM.FirstOrDefault().Status == "Received")
+                    {
+                        @Html.ActionLink("Received", "SendFeedBackMail", "ProductInfo", new { id = item.Data.CAS_ProductId }, new { id = item.Data.CAS_ProductId, @class = "btn-sm btn-success btnSendMail", @readonly = "readonly", @onclick = "javascript:return false;" })
+                    }
+                    @*<input type="submit" id="btnSendMail" name="Send Mail" value="Send Mail" class="btn-sm btn-info btnSendMail" />*@
+                    @*<input type="submit" id="btnMailSent" name="Mail Sent" value="Mail Sent" readonly class="btn-sm btn-info btnMailSent" />*@
+                </td>
+            </tr>
+            }
+    </table>
+    <div style="text-align: center; padding:0px;">
+        <ul class="pagination" style=" padding: 0px; margin:0px">
+            <li><a href="#" class="pager">&laquo; First</a></li>
+            @for (var i = 0; i < info.PageCount; i++)
+        {
+            if (i >= info.PageCurrentIndex - 2 && i <= info.PageCurrentIndex + 2)
+            {
+                if (i != info.PageCurrentIndex)
+                {
+                <li><a href="#" data-pageindex="@i" class="pager">@(i + 1)</a></li>
+                }
+                else
+                {
+                <li><a href="#" data-pageindex="@i" class="pager" style="background-color: #b0e0e6">@(i + 1)</a></li>
+                }
+            }
+        }
+            <li><a href="#" data-pageindex="@(info.PageCount - 1)" class="pager">Last &raquo;</a></li>
+        </ul>
+    </div>
 
-</div>
+    <div id="divSelected">
+    </div>
+}
 
 <script type="text/javascript">
     $(document).ready(function () {
-        //$("#txtSearch").keyup(function () {
-        $(document).on('keyup', '#txtSearch', function () {
-            var value = this.value.toLowerCase().trim();
-            //var value = this.value;
-            $("#productInfoGrid").find("tr").each(function (index) {
-                if (!index) return;
-                var id = $(this).find("td").text().toLowerCase();
-                $(this).toggle(id.indexOf(value) != -1);
+        $(".pager").click(function (evt) {
+            var pageindex = $(evt.target).data("pageindex");
+            $("#PageCurrentIndex").val(pageindex);
+            evt.preventDefault();
+
+            $("form").submit();
+        });
+        $('.getdata').click(function () {
+            var id = $('.getdata').attr('id');
+            $.ajax({
+                url: '@Url.Action("GetSelectedProductInfo", "ProductInfo")',
+                type: "GET",
+                async: true,
+                cache: false,
+                crossDomain: true,
+                data: { "id": id },
+                "success": function (result) {
+                    $("#divSelected").html(result);
+                }
             });
+        });
+        $(".btnSendMail").click(function (e) {
+            $("#divSelected").hide();
+
+            $.ajax({
+                url: '@Url.Action("SendFeedBackMail", "ProductInfo")',
+                type: "GET",
+                async: true,
+                cache: false,
+                crossDomain: true,
+                data: { "id": id },
+                "success": function (result) {
+                    $("#divSelected").html(result);
+                }
+            });
+
         });
     });
 </script>

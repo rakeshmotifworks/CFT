@@ -12,7 +12,7 @@ namespace CFT.Repo.Model
         {
             Expert = true;
             IsSortAsc = true;
-            PageSize = 10;
+            PageSize = 5;
             PageCurrentIndex = 0;
         }
         public string SortName { get; set; }

@@ -18,7 +18,7 @@ namespace CFT.UI.Controllers
         private CAS_ProductInfoVM _cAS_ProductInfoVM;
         public ActionResult Index()
         {
-            CreateWepApi();
+            //CreateWepApi();
             return View();
         }
 

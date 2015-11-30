@@ -74,6 +74,7 @@
     <Compile Include="IBAL\IProductInfoBAL.cs" />
     <Compile Include="Model\CAS_FeedbackDataVM.cs" />
     <Compile Include="Model\CAS_ProductInfoVM.cs" />
+    <Compile Include="Model\ProductInfoSearch.cs" />
     <Compile Include="Model\SearchVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

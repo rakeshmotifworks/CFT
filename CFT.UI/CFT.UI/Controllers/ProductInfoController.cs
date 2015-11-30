@@ -1,5 +1,6 @@
 ﻿using CFT.Repo.BAL;
 using CFT.Repo.Model;
+using CFT.UI.GenClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,65 @@ namespace CFT.UI.Controllers
     public class ProductInfoController : Controller
     {
         private List<CAS_ProductInfoVM> _cAS_ProductInfoVMList;
+        private CAS_ProductInfoVM _cAS_ProductInfoVM;
         private ProductInfoBAL _productInfoBAL;
+        private SearchVM _searchVM;
+        private ProductInfoSearch _productInfoSearch;
         // GET: ProductInfo
-        public ActionResult Index()
+        public ActionResult Index(SearchVM obj)
         {
             _productInfoBAL = new ProductInfoBAL();
             _cAS_ProductInfoVMList = new List<CAS_ProductInfoVM>();
+            _searchVM = new SearchVM();
+            _productInfoSearch = new ProductInfoSearch();
             try
             {
-                _cAS_ProductInfoVMList = _productInfoBAL.GetAllProductData();
+                obj = obj ?? new SearchVM();
+                SearchVM objjsearch = Session["searchvm"] != null ? Session["searchvm"] as SearchVM : obj;
+                objjsearch.PageCurrentIndex = obj.PageCurrentIndex <= 0 ? 0 : obj.PageCurrentIndex;
+
+                int totalcount;
+
+                _cAS_ProductInfoVMList = _productInfoBAL.GetAllProductData(objjsearch, out totalcount);
+                _productInfoSearch.TotalCount = totalcount;
+                _productInfoSearch.SearchExpression = objjsearch;
+                _productInfoSearch.CAS_ProductInfoVM = _cAS_ProductInfoVMList;
             }
             catch (Exception ex)
             {
               
             }
 
-            return View(_cAS_ProductInfoVMList);
+            return View(_productInfoSearch);
+        }
+
+        public ActionResult GetSelectedProductInfo(string id)
+        {
+            _productInfoBAL = new ProductInfoBAL();
+            _cAS_ProductInfoVM = new CAS_ProductInfoVM();
+
+            _cAS_ProductInfoVM = _productInfoBAL.GetProductDataById(id);
+
+            return PartialView("_SelectedProductInfo", _cAS_ProductInfoVM);
+        }
+
+        public ActionResult SendFeedBackMail(string id)
+        {
+
+              _productInfoBAL = new ProductInfoBAL();
+            _cAS_ProductInfoVM = new CAS_ProductInfoVM();
+
+            _cAS_ProductInfoVM = _productInfoBAL.GetProductDataById(id);
+
+            CommonClass common = new CommonClass();
+            common.SendMail(_cAS_ProductInfoVM.Customer_Name, _cAS_ProductInfoVM.Project_Name);
+
+            _productInfoBAL = new ProductInfoBAL();
+            _productInfoBAL.UpdateProductInfoAfterMailSent(id);
+
+            SearchVM obj = new SearchVM();
+
+            return RedirectToAction("Index", obj);
         }
 
         // GET: ProductInfo/Details/5

@@ -14,6 +14,8 @@ namespace CFT.Repo.IBAL
         Collection<CAS_FeedbackData> GetCAS_FeedbackData(CAS_ProductInfoVM model);
         CAS_ProductInfoVM UpdateProductData(CAS_ProductInfoVM model);
         CAS_FeedbackDataVM UpdateFeedbackData(CAS_ProductInfoVM model);
-        List<CAS_ProductInfoVM> GetAllProductData();
+        List<CAS_ProductInfoVM> GetAllProductData(SearchVM search, out int totalcount);
+        CAS_ProductInfoVM GetProductDataById(string id);
+        void UpdateProductInfoAfterMailSent(string id);
     }
 }
